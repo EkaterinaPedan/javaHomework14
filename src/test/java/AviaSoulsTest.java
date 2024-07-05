@@ -18,22 +18,6 @@ public class AviaSoulsTest {
         Assertions.assertTrue(ticket1.compareTo(ticket4) == 0);
     }
 
-    @Test
-    public void shouldSearchTickets() {
-        Ticket ticket1 = new Ticket("Тюмень", "Москва", 6_000, 19_00, 22_00);
-        Ticket ticket2 = new Ticket("Москва", "Санкт-Петербург", 3_000, 12_00, 13_00);
-        Ticket ticket3 = new Ticket("Тюмень", "Москва", 4_000, 15_00, 17_00);
-        Ticket ticket4 = new Ticket("Тюмень", "Москва", 5_000, 8_00, 10_00);
-
-        AviaSouls manager = new AviaSouls();
-        manager.add(ticket1);
-        manager.add(ticket2);
-        manager.add(ticket3);
-        manager.add(ticket4);
-
-        Ticket[] searchResult = manager.search("Тюмень", "Москва");
-        Assertions.assertArrayEquals(new Ticket[]{ticket3, ticket4, ticket1}, searchResult);
-    }
 
     @Test
     public void flightTimeComparatorTest() {
@@ -65,5 +49,56 @@ public class AviaSoulsTest {
         Ticket[] searchResult = manager.searchAndSortBy("Москва", "Тюмень", ticketComparator);
 
         Assertions.assertArrayEquals(new Ticket[]{ticket2, ticket1, ticket3}, searchResult);
+    }
+
+    @Test
+    public void shouldSearchThreeTickets() {
+        Ticket ticket1 = new Ticket("Тюмень", "Москва", 6_000, 19_00, 22_00);
+        Ticket ticket2 = new Ticket("Москва", "Санкт-Петербург", 3_000, 12_00, 13_00);
+        Ticket ticket3 = new Ticket("Тюмень", "Москва", 4_000, 15_00, 17_00);
+        Ticket ticket4 = new Ticket("Тюмень", "Москва", 5_000, 8_00, 10_00);
+
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+
+        Ticket[] searchResult = manager.search("Тюмень", "Москва");
+        Assertions.assertArrayEquals(new Ticket[]{ticket3, ticket4, ticket1}, searchResult);
+    }
+
+    @Test
+    public void shouldSearchOneTicket() {
+        Ticket ticket1 = new Ticket("Тюмень", "Москва", 6_000, 19_00, 22_00);
+        Ticket ticket2 = new Ticket("Москва", "Санкт-Петербург", 3_000, 12_00, 13_00);
+        Ticket ticket3 = new Ticket("Тюмень", "Саратов", 4_000, 15_00, 17_00);
+        Ticket ticket4 = new Ticket("Тюмень", "Нижний Тагил", 5_000, 8_00, 10_00);
+
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+
+        Ticket[] searchResult = manager.search("Тюмень", "Москва");
+        Assertions.assertArrayEquals(new Ticket[]{ticket1}, searchResult);
+    }
+
+    @Test
+    public void shouldSearchZeroTickets() {
+        Ticket ticket1 = new Ticket("Тюмень", "Екатеринбург", 6_000, 19_00, 22_00);
+        Ticket ticket2 = new Ticket("Москва", "Санкт-Петербург", 3_000, 12_00, 13_00);
+        Ticket ticket3 = new Ticket("Тюмень", "Саратов", 4_000, 15_00, 17_00);
+        Ticket ticket4 = new Ticket("Тюмень", "Нижний Тагил", 5_000, 8_00, 10_00);
+
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+
+        Ticket[] searchResult = manager.search("Тюмень", "Москва");
+        Assertions.assertArrayEquals(new Ticket[]{}, searchResult);
     }
 }

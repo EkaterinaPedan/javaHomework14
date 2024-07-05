@@ -20,7 +20,7 @@ public class AviaSouls {
     public Ticket[] findAll() {
         return tickets;
     }
-    
+
     public Ticket[] search(String from, String to) {
         Ticket[] result = new Ticket[0]; // массив для ответа
         for (Ticket ticket : tickets) { // перебираем все билеты
